@@ -78,7 +78,7 @@ const app = Vue.createApp({
       }
 
       this.handleAttackToPlayer();
-      this.handleAddBattleLog('Player', 'heal', healing);
+      this.handleAddBattleLog('Player', 'Heal', healing);
     },
     handleSurrender() {
       this.playerHealth = 0;

@@ -54,7 +54,14 @@
         <h2>Battle Log</h2>
         <ul v-if="battleLog.length > 0">
           <li v-for="log in battleLog" key="Math.random()">
-            {{log.actionBy}} {{log.actionType}} {{log.actionValue}}
+            <span
+              :class="{'log--player':log.actionBy ==='Player', 'log--monster':log.actionBy ==='Monster'}"
+              >{{ log.actionBy }}
+            </span>
+            <span :class="{'log--heal':log.actionType ==='Heal'}"
+              >{{log.actionType}}
+            </span>
+            <span class="log--damage">{{log.actionValue}}</span>
           </li>
         </ul>
       </section>
