@@ -53,7 +53,9 @@
       <section id="log" class="container">
         <h2>Battle Log</h2>
         <ul v-if="battleLog.length > 0">
-          <li v-for="log in battleLog" key="Math.random()">{{log}}</li>
+          <li v-for="log in battleLog" key="Math.random()">
+            {{log.actionBy}} {{log.actionType}} {{log.actionValue}}
+          </li>
         </ul>
       </section>
     </div>

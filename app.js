@@ -42,31 +42,31 @@ const app = Vue.createApp({
     },
   },
   methods: {
-    handleAddBattleLog(log) {
-      this.battleLog.push(log);
+    handleAddBattleLog(who, what, value) {
+      this.battleLog.unshift({
+        actionBy: who,
+        actionType: what,
+        actionValue: value,
+      });
     },
     handleAttackToMonster() {
       this.currentRound++;
       const damage = handleGetRandomValue(5, 12);
       this.monsterHealth -= damage;
       this.handleAttackToPlayer();
-      this.handleAddBattleLog(
-        `Round:${this.currentRound}: Attacked ${damage}%`
-      );
+      this.handleAddBattleLog('Player', 'Attack', damage);
     },
     handleAttackToPlayer() {
       const damage = handleGetRandomValue(8, 15);
       this.playerHealth -= damage;
-      this.handleAddBattleLog(`Round:${this.currentRound}: Damaged ${damage}%`);
+      this.handleAddBattleLog('Monster', 'Attack', damage);
     },
     handleSpecialAttack() {
       this.currentRound++;
       const damage = handleGetRandomValue(10, 17);
       this.monsterHealth -= damage;
       this.handleAttackToPlayer();
-      this.handleAddBattleLog(
-        `Round:${this.currentRound}: Attacked ${damage}%`
-      );
+      this.handleAddBattleLog('Player', 'Special attack', damage);
     },
     handleHealPlayerHealth() {
       this.currentRound++;
@@ -78,14 +78,12 @@ const app = Vue.createApp({
       }
 
       this.handleAttackToPlayer();
-      this.handleAddBattleLog(`Round:${this.currentRound}: Healed ${healing}%`);
+      this.handleAddBattleLog('Player', 'heal', healing);
     },
     handleSurrender() {
       this.playerHealth = 0;
       this.winner = 'monster';
-      this.handleAddBattleLog(
-        `Round:${this.currentRound}: Surrendered You lost!`
-      );
+      this.handleAddBattleLog('Player', 'surrender', 'Game Over');
     },
 
     handleReStart() {
